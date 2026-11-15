@@ -27,6 +27,7 @@ export function seedDevEditor(): void {
       selected: 1,
       anim: { dict: 'mp_player_inteat@burger', name: 'mp_player_int_eat_burger', flag: 49, speed: 1, paused: false },
       scene: { backdrop: { enabled: false, color: '#0A4BD0' } },
+      nativeGizmo: query.get('native') !== '0',
     });
 
     const tab = query.get('tab') as Tab | null;

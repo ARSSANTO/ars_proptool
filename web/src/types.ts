@@ -80,6 +80,7 @@ export interface OpenData {
   selected: number | null;
   anim: { dict?: string; name?: string; flag: number; speed: number; paused: boolean };
   scene: { backdrop: { enabled: boolean; color: string }; hour?: number; weather?: string; light?: Partial<LightInfo> };
+  nativeGizmo?: boolean; // the server lets the game's own gizmo run
 }
 
 export interface GizmoOpen {

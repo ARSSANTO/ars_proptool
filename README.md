@@ -26,13 +26,9 @@ No framework, no other resource required.
 
 1. Put the `ars_proptool` folder in your `resources`.
 2. Add `ensure ars_proptool` to your `server.cfg`.
-3. For the native gizmo, give the resource permission to run the game's gizmo commands:
+3. In game, run `/proptool` (optionally `/proptool <model>` to start with a model).
 
-   ```text
-   add_ace resource.ars_proptool command allow
-   ```
-
-4. In game, run `/proptool` (optionally `/proptool <model>` to start with a model).
+The native gizmo needs no setup: it is offered when the server lets the resource run the game's gizmo commands, and the editor uses the UI gizmo when it does not. To turn the native gizmo on for a server that blocks them, grant the resource the commands (`command.+gizmoSelect`, `command.+gizmoTranslation`, `command.+gizmoRotation`, `command.+gizmoLocal` and the matching `-` versions), or `add_ace resource.ars_proptool command allow`.
 
 Key bindings (Test mode back key and the native gizmo keys) appear in the game's key binding settings under the resource.
 

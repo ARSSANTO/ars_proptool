@@ -60,6 +60,7 @@ const HEIGHT = [
 export function GizmoLayer() {
   const gizmoOpen = useEditorStore((s) => s.gizmo !== null);
   const nativeOn = useEditorStore((s) => s.nativeGizmo);
+  const nativeAvailable = useEditorStore((s) => s.nativeAvailable);
   const tool = useEditorStore((s) => s.gizmoTool);
   const space = useEditorStore((s) => s.gizmoSpace);
   const side = useEditorStore((s) => s.config.side);
@@ -95,7 +96,7 @@ export function GizmoLayer() {
             { keys: HEIGHT, label: 'Camera up / down' },
             { keys: [{ label: 'Shift', code: 'ShiftLeft' }], label: 'Hold for precision' },
             { keys: [{ label: 'RMB' }], label: 'Rotate camera' },
-            { keys: [{ label: 'F11', code: 'F11' }], label: 'Switch to native gizmo', onClick: () => void startGizmo(true) },
+            ...(nativeAvailable ? [{ keys: [{ label: 'F11', code: 'F11' }], label: 'Switch to native gizmo', onClick: () => void startGizmo(true) }] : []),
             { keys: [{ label: '↵', code: 'Enter' }], label: 'Finish editing', onClick: gizmoSave },
             { keys: [{ label: 'Esc', code: 'Escape' }], label: 'Cancel editing', onClick: gizmoCancel },
             { keys: [{ label: 'P', code: 'KeyP' }], label: 'Play / pause animation', onClick: () => void togglePause() },

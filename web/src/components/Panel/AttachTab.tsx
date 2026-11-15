@@ -291,6 +291,7 @@ export function AttachTab() {
   const props = useEditorStore((s) => s.props);
   const selectedId = useEditorStore((s) => s.selectedId);
   const prop = useEditorStore(selectedProp);
+  const nativeAvailable = useEditorStore((s) => s.nativeAvailable);
 
   return (
     <>
@@ -321,9 +322,11 @@ export function AttachTab() {
               <button type="button" className="btn is-primary is-wide" onClick={() => void startGizmo(false)}>
                 <RiDragMove2Fill size={18} /> Edit with gizmo
               </button>
-              <button type="button" className="icon-btn is-box" aria-label="Edit with the native gizmo" data-tip="Edit with the game's own gizmo" onClick={() => void startGizmo(true)}>
-                <RiCursorFill size={18} />
-              </button>
+              {nativeAvailable && (
+                <button type="button" className="icon-btn is-box" aria-label="Edit with the native gizmo" data-tip="Edit with the game's own gizmo" onClick={() => void startGizmo(true)}>
+                  <RiCursorFill size={18} />
+                </button>
+              )}
               <button type="button" className="icon-btn is-box" aria-label={prop.visible ? 'Hide prop' : 'Show prop'} data-tip={prop.visible ? 'Hide the prop' : 'Show the prop'} onClick={() => toggleVisible(prop.id)}>
                 {prop.visible ? <RiEyeFill size={18} /> : <RiEyeOffFill size={18} />}
               </button>

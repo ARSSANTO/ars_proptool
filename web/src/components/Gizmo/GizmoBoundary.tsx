@@ -12,7 +12,7 @@ export class GizmoBoundary extends Component<{ children: ReactNode }, { failed: 
 
   componentDidCatch(error: Error): void {
     console.error('[ars_proptool] the UI gizmo canvas failed', error);
-    toast('The UI gizmo could not start, use the native gizmo', 'error');
+    toast(useEditorStore.getState().nativeAvailable ? 'The UI gizmo could not start, use the native gizmo' : 'The UI gizmo could not start', 'error');
     gizmoCancel();
     useEditorStore.getState().setGizmo(null);
   }

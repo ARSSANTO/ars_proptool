@@ -69,6 +69,7 @@ interface EditorState {
   gizmoTool: GizmoTool;
   gizmoSpace: GizmoSpace;
   nativeGizmo: boolean; // the game's gizmo is running on the prop
+  nativeAvailable: boolean; // the server lets the game's gizmo run, so it is offered
   bonePicking: boolean;
 
   toasts: Toast[];
@@ -96,6 +97,7 @@ interface EditorState {
   setGizmoTool: (tool: GizmoTool) => void;
   setGizmoSpace: (space: GizmoSpace) => void;
   setNativeGizmo: (on: boolean) => void;
+  setNativeAvailable: (on: boolean) => void;
   setBonePicking: (on: boolean) => void;
   pushToast: (text: string, kind?: Toast['kind'], action?: Toast['action']) => void;
   dropToast: (id: number) => void;
@@ -129,6 +131,7 @@ export const useEditorStore = create<EditorState>()((set) => ({
   gizmoTool: 'translate',
   gizmoSpace: 'world',
   nativeGizmo: false,
+  nativeAvailable: false,
   bonePicking: false,
 
   toasts: [],
@@ -161,6 +164,7 @@ export const useEditorStore = create<EditorState>()((set) => ({
   setGizmoTool: (gizmoTool) => set({ gizmoTool }),
   setGizmoSpace: (gizmoSpace) => set({ gizmoSpace }),
   setNativeGizmo: (nativeGizmo) => set({ nativeGizmo }),
+  setNativeAvailable: (nativeAvailable) => set({ nativeAvailable }),
   setBonePicking: (bonePicking) => set({ bonePicking }),
   pushToast: (text, kind = 'ok', action) =>
     set((s) => ({ toasts: [...s.toasts.slice(-2), { id: toastId++, text, kind, action }] })),

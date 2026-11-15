@@ -163,6 +163,7 @@ export async function openEditor(data: OpenData): Promise<void> {
   confirmed.clear();
   props.forEach((prop) => confirmed.set(prop.id, clone(prop)));
   store.setProps(props, data.selected ?? props[0]?.id ?? null);
+  store.setNativeAvailable(data.nativeGizmo === true);
 
   const defaults = store.config.defaultAnim;
   const dict = data.anim?.dict;
@@ -216,6 +217,8 @@ export async function startTest(): Promise<void> {
 // Gizmo
 // ---------------------------------------------------------------------------------------------
 export async function startGizmo(native = false): Promise<void> {
+  if (native && !get().nativeAvailable) return;
+
   const id = get().selectedId;
 
   if (id === null) {

@@ -19,6 +19,7 @@ local function stateForPage(selected)
         selected = selected,
         anim = Anim.Describe(),
         scene = Scene.Describe(),
+        nativeGizmo = Editor.nativeGizmo == true,
     }
 end
 
@@ -228,7 +229,9 @@ local function open(model)
     CreateThread(loop)
 end
 
-RegisterNetEvent('ars_proptool:client:Open', function(model)
+RegisterNetEvent('ars_proptool:client:Open', function(model, nativeGizmo)
+    Editor.nativeGizmo = nativeGizmo == true
+
     CreateThread(function() open(model) end)
 end)
 
@@ -417,6 +420,7 @@ end)
 
 RegisterNUICallback('proptool:gizmoNative', function(data, cb)
     if not Editor.active or type(data) ~= 'table' then return reply(cb, false, 'The editor is not open') end
+    if not Editor.nativeGizmo then return reply(cb, false, 'The native gizmo is not available on this server') end
 
     reply(cb, Gizmo.StartNative(tonumber(data.id)), 'The native gizmo could not open')
 end)
